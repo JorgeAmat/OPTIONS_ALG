@@ -4,7 +4,7 @@ import numpy as np
 
 #Con esta clase definimos el objeto de configuración
 class DataCleanerConfig:
-    def __init__(self, source="yfinance", symbol="QQQ", interval="1h", start_date="2025-10-21", end_date="2025-10-22", csv_path=None):
+    def __init__(self, source="yfinance", symbol="QQQ", interval="15m", start_date="2025-10-01", end_date="2025-10-22", csv_path=None):
         self.source = source
         self.symbol = symbol
         self.interval = interval
@@ -56,7 +56,6 @@ class DataCleaner:
             data = data.rename(columns={"Datetime": "datetime"})
         else:
             data["datetime"] = data.index
-       
         data.columns = [c.lower() for c in data.columns]
         return data         
 
@@ -114,7 +113,7 @@ def preprocess_data(df):
     return df
 
 # TEST:
-cfg = DataCleanerConfig(source="yfinance",symbol="QQQ",interval="1h",start_date="2025-10-21",end_date="2025-10-22")
+cfg = DataCleanerConfig(source="yfinance",symbol="QQQ",interval="15m",start_date="2025-10-01",end_date="2025-10-22")
 symbol_df = DataCleaner(cfg)
 raw_df = symbol_df.cargar_datos()
 
